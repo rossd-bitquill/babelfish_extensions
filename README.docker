@@ -1,0 +1,37 @@
+## Docker utility for devel
+
+The current implementation of Docker was designed for the sole purpose of test and debugging. It can
+compile images under different branches, configures the build with verbose options, and it has two phases  
+(core and extensions Dockerfiles).  
+
+The generated images are not applicable for Production environments.
+
+## (Phase 2): Extensions local image build
+
+```bash
+docker build -t babelfish_dev .
+```
+
+## Starting the cluster
+
+```bash
+docker run --name bbf -e POSTGRES_PASSWORD=mysecretpassword \
+  -e BABELFISH_USER=bbf -e BABELFISH_PASS=bbf \
+  -e BABELFISH_DB=bbf -d babelfish_dev
+```
+
+Verify that your image started up:
+
+```bash
+$ docker ps
+CONTAINER ID   IMAGE                         COMMAND                  CREATED         STATUS         PORTS                NAMES
+2bd299d802c9   babelfish_dev                 "/usr/local/bin/entr…"   7 seconds ago   Up 7 seconds   1433/tcp, 5432/tcp   bbf
+```
+
+Clean up by: 
+
+```bash
+docker rm bbf
+```
+
+
