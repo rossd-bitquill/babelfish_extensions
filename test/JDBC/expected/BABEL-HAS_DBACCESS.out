@@ -1,0 +1,26 @@
+DROP DATABASE IF EXISTS TestDB;
+CREATE DATABASE TestDB;
+SELECT HAS_DBACCESS('TestDB');
+GO
+~~START~~
+int
+1
+~~END~~
+
+
+SELECT HAS_DBACCESS('does_not_exist');
+GO
+~~START~~
+int
+1
+~~END~~
+
+
+DROP DATABASE TestDB;
+SELECT HAS_DBACCESS('TestDB');
+GO
+~~START~~
+int
+1
+~~END~~
+
